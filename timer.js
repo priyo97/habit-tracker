@@ -72,7 +72,7 @@ function Habit(id, habit_name, habit_start_date, habit_start_time)
                 var rem   = rem % (60 * 1000); 
                 var secs  = Math.floor(rem / 1000);
 
-                document.getElementById("set-habit-time-since-last-" + id).textContent = days + " days: " + hours + " hours: " + mins + " mins: " + secs + " secs: ";
+                document.getElementById("set-habit-time-since-last-" + id).textContent = days + "\xa0\xa0\xa0days\xa0\xa0\xa0\xa0:\xa0\xa0\xa0\xa0" + hours + "\xa0\xa0\xa0hours\xa0\xa0\xa0\xa0:\xa0\xa0\xa0\xa0" + mins + "\xa0\xa0\xa0mins\xa0\xa0\xa0\xa0:\xa0\xa0\xa0\xa0" + secs + "\xa0\xa0\xa0secs";
 
             }, 1000, this.habit_details.habit_id, start_time);    
         };
@@ -177,9 +177,11 @@ class HabitList
             HabitList.update_storage();
          
             document.querySelector("#habit-update-box").style.display = "none";
+            document.querySelector("#update-modal").style.display = "none";
         });
          
         document.querySelector("#habit-update-box").style.display = "block";
+        document.querySelector("#update-modal").style.display = "block";
     }
 
     static render_updated_habit(h_details)
@@ -211,32 +213,44 @@ class HabitList
         let p_habit_start_date      = document.createElement("p");
         let p_habit_start_time      = document.createElement("p");
         let p_habit_time_since_last = document.createElement("p");
-        
+        let p_on = document.createElement("p");
+
+        p_on.className = "pOn";
+        p_on.textContent = "on";
+
+        p_habit_name.className = "pHabitName";
         p_habit_name.id = "set-habit-name-" + h.habit_id;
         p_habit_name.textContent = h.habit_name;
 
+        p_habit_start_date.className = "pHabitDate";
         p_habit_start_date.id = "set-habit-start-date-" + h.habit_id;
         p_habit_start_date.textContent = h.habit_start_date;
 
+        p_habit_start_time.className = "pHabitTime";
         p_habit_start_time.id = "set-habit-start-time-" + h.habit_id;
         p_habit_start_time.textContent = h.habit_start_time;
 
+        p_habit_time_since_last.className = "pHabitTimeLast";
         p_habit_time_since_last.id = "set-habit-time-since-last-" + h.habit_id;
 
         habit_element.appendChild(p_habit_name);
-        habit_element.appendChild(p_habit_start_date);
         habit_element.appendChild(p_habit_start_time);
+        habit_element.appendChild(p_on);
+        habit_element.appendChild(p_habit_start_date);
         habit_element.appendChild(p_habit_time_since_last);
+
 
         let id = h.habit_id;
 
         let habit_del_button = document.createElement("button");
-        habit_del_button.textContent = "delete habit";
+        habit_del_button.textContent = "Delete";
         habit_del_button.className = "drop-habit-button";
+        habit_del_button.id = "drop-habit-button";
         
         let habit_update_button = document.createElement("button");
-        habit_update_button.textContent = "update habit";
+        habit_update_button.textContent = "Update";
         habit_update_button.className = "update-habit-button";
+        habit_update_button.id = "update-habit-button";
 
         habit_del_button.addEventListener("click", function(){
             HabitList.del_habit(id);
@@ -246,8 +260,9 @@ class HabitList
             HabitList.update_habit(id);
         });
 
-        habit_element.appendChild(habit_del_button);
         habit_element.appendChild(habit_update_button);
+        habit_element.appendChild(habit_del_button);
+        
 
         habit_list_element.appendChild(habit_element);
 

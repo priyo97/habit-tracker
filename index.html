@@ -1,32 +1,49 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="timer.css">
+    <link rel="stylesheet" type="text/css" href="modal.css">
     <title>Bad Habit tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="layout">
-        <div id="habit-list" class="habit-section-box">
-        <h1>Activity/Habit List</h1>
-        </div> 
-        <div id="habit-form" class="habit-section-box">
-            <div id="habit-insert-box"> 
-                <h1>Add Habit</h1>
-                <input id="habit-name" type="text" placeholder="Enter habit name">
-                <input id="habit-start-date" type="date">
-                <input id="habit-start-time" type="time">
-                <button id="habit-button">add habit</button>
+        
+        <!-- header -->
+        <div class="header">Track your habits anytime</div>
+
+        <!-- shows habits -->
+        <div id="habit-list" class="habit-section-box"><!-- habit list hai -->
+
+        <!-- trigger/open add modal -->
+            <button class="btn" id="add-modal">+</button>
+            
+
+            <!-- add modal content -->
+            <div class="modal" id="modal">
+                <div class="modal-content" id="modal-content">
+                    <button id="habit-button" class="close-button">&#10003;</button>
+                    <div id="habit-insert-box"> 
+                        <input id="habit-name" type="text" placeholder="title"><br>
+                        <input id="habit-start-date" type="date" ><br>
+                        <input id="habit-start-time" type="time" >
+                    </div>  
+                </div>
             </div>
-            <div id="habit-update-box">
-                <h1>Update habit</h1>
-                <input id="habit-name" type="text">
-                <input id="habit-start-date" type="date">
-                <input id="habit-start-time" type="time">
-                <button id="habit-button">update habit</button>
+            <div class="update-modal" id='update-modal'>
+                <div class='update-modal-content' id='update-modal-content'>
+                    <div id="habit-update-box">
+                        <input id="habit-name" type="text" placeholder="title"><br>
+                        <input id="habit-start-date" type="date"><br>
+                        <input id="habit-start-time" type="time">
+                        <button id="habit-button" class="close-update-button">&#10003;</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <script src="timer.js" type="text/javascript">
-    </script>
+    <script src="timer.js" type="text/javascript"></script>
+    <script src="modal.js" type="text/javascript"></script>
 </body>
 </html>
